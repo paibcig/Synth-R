@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Synth-R</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-  </head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Synth-R</title>
+  <link rel="shortcut icon" href="TemplateData/favicon.ico">
+  <link rel="stylesheet" href="TemplateData/style.css">
+  <script src="TemplateData/UnityProgress.js"></script>
+  
+  <script src="Build/UnityLoader.js"></script>
+  <script>
+    var unityInstance = UnityLoader.instantiate("unityContainer", "Build/Portfolio.json", { onProgress: UnityProgress });
+
+    window.addEventListener("resize", onResize);
+
+    function onResize() {
+      unityInstance.SendMessage("AdjustWindowSize", "SetWidth", window.innerWidth);
+      unityInstance.SendMessage("AdjustWindowSize", "SetHeight", window.innerHeight);
+      unityInstance.SendMessage("AdjustWindowSize", "OnResize");
+    }
+
+  </script>
+</head>
   <body>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
